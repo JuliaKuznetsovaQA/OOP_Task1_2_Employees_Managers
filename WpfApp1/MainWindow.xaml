@@ -8,20 +8,58 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button x:Name="button" Content="Button" Grid.Row="0" Grid.Column="0" Click="button_Click"/>
-        <StackPanel Grid.Row="1" Grid.Column="0">
-            <Label x:Name="label" Background="#FFEA0C0C" Foreground="#FFCEBF78" FontSize="18" FontWeight="Bold"/>
-            <ListBox x:Name="listBox" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Left"/>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label x:Name="label_name" Content="введите ФИО"/>
+            <TextBox x:Name="textBox_name" TextWrapping="Wrap" Text="" Width="220"/>
+            <Label x:Name="label_salary" Content="введите зарплату" Margin="40,0,0,0"/>
+            <TextBox x:Name="textBox_salary" TextWrapping="Wrap" Text="" Width="220"/>
+
         </StackPanel>
-        <TextBox x:Name="textBox" Grid.Row="2" TextWrapping="Wrap" Text=""/>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label x:Name="label_hire_date" Content="Дата приема на работу:" Margin="40,0,40,0"/>
+            <Label x:Name="label_date" Content="день"/>
+            <TextBox x:Name="textBox_date" TextWrapping="Wrap" Text="" Width="80"/>
+            <Label x:Name="label_month" Content="месяц" Margin="40,0,0,0"/>
+            <TextBox x:Name="textBox_month" TextWrapping="Wrap" Text="" Width="80"/>
+            <Label x:Name="label_year" Content="год" Margin="40,0,0,0"/>
+            <TextBox x:Name="textBox_year" TextWrapping="Wrap" Text="" Width="80"/>
+        </StackPanel>
+        <Button x:Name="button_add_employee" Content="Добавить сотрудника" Grid.Row="2" Click="button_add_employee_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FFB7DED9" Offset="1"/>
+                    <GradientStop Color="#FFEBF5F5" Offset="0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
+        <Label x:Name="label_list_employee" Grid.Row="3" Content="Список сотрудников" Background="#FF0CBCEA" Foreground="#FF060931" FontSize="16" FontWeight="Bold"/>
         
+        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal">
+            <ListBox x:Name="listBox_list_employee" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Left" Margin="20,0,20,0"/>
+            
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal">
+            <ListBox x:Name="listBox_list_employees_and_managers" d:ItemsSource="{d:SampleData ItemCount=4}" Margin="20,0,20,0"/>
+            <Button Content="Получить список сотрудников и менеджеров" Margin="5,0,5,0" Height="40"  VerticalAlignment="Top" Click="Button_Click" HorizontalAlignment="Right" Background="#FFF1EFEB"/>
+        </StackPanel>
+
+        <Button x:Name="button_increase_salary" Content="Увеличить зарплату всем сотрудникам" Grid.Row="6" Click="button_increase_salary_Click" Background="#FFA9DC93"/>
+
+
     </Grid>
 
 

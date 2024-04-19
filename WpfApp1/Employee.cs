@@ -17,22 +17,28 @@ namespace WpfApp1
     // методы доступа к полям класса (свойства)
     // увеличение зарплаты на заданный процент (зарплата * процент/100);
     // вычисление стажа
-    class Employee
+    public class Employee
     {
         private String name;
         private int salary;
-        private DateTime dateTime;
-        // TODO дата приема на работу
+        private DateTime hireDate;
+
+        // Конструкторы
         public Employee(String name, int salary, int day, int month, int year) { 
             this.name = name;
             this.salary = salary;
-            this.dateTime = new DateTime(year, month, day);
+            this.hireDate = new DateTime(year, month, day);
         }
-        public Employee(String name, int salary)
+
+        public Employee(String name, int salary) : this(name, salary, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year) { }
+
+
+        public Employee(String name) 
+            //: this(name, 0, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year) { }
         {
             this.name = name;
-            this.salary = salary;
-            this.dateTime = DateTime.Now;
+            this.salary = 0;
+            this.hireDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         }
 
         public String getName()
@@ -54,10 +60,25 @@ namespace WpfApp1
                 }
                 else
                 {
-                    this.Salary = value;
+                    this.salary = value;
                 }
             }
             get => this.salary;
+        }
+
+        public virtual int getSalary()
+        {
+            return this.salary;
+        }
+
+        public override string ToString()
+        {
+            return this.name + ", зарплата = " + this.salary + ", дата приема на работу: " + this.hireDate;
+        }
+
+        public void IncreaseSalary(int percent)
+        {
+            this.Salary += this.Salary / 100 * percent;
         }
 
     }
