@@ -22,23 +22,32 @@ namespace WpfApp1
         private String name;
         private int salary;
         private DateTime hireDate;
+        public int id;
+        public static int nextId = 1;
 
         // Конструкторы
         public Employee(String name, int salary, int day, int month, int year) { 
             this.name = name;
             this.salary = salary;
             this.hireDate = new DateTime(year, month, day);
+            this.id = getNextId();
         }
 
-        public Employee(String name, int salary) : this(name, salary, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year) { }
-
+        public Employee(String name, int salary)
+        //: this(name, salary, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, id) { }
+        {
+            this.name = name;
+            this.salary = salary;
+            this.hireDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            this.id = getNextId();
+        }
 
         public Employee(String name) 
-            //: this(name, 0, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year) { }
         {
             this.name = name;
             this.salary = 0;
             this.hireDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            this.id = getNextId();
         }
 
         public String getName()
@@ -73,7 +82,7 @@ namespace WpfApp1
 
         public override string ToString()
         {
-            return this.name + ", зарплата = " + this.salary + ", дата приема на работу: " + this.hireDate;
+            return "id: " + id + " сотрудник ФИО: " + this.name + ", зарплата = " + this.salary + ", дата приема на работу: " + this.hireDate;
         }
 
         public void IncreaseSalary(int percent)
@@ -81,5 +90,18 @@ namespace WpfApp1
             this.Salary += this.Salary / 100 * percent;
         }
 
+        public int getNextId()
+        {
+            nextId += 1;
+            return nextId;
+        }
+        public int getId()
+        {
+            return this.id;
+        }
+        public void setId()
+        {
+            this.id = getNextId();
+        }
     }
 }

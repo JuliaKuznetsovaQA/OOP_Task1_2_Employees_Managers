@@ -28,14 +28,14 @@ namespace WpfApp1
 
         Employee[] emps = new Employee[10];
         
-        int count = 0;
+        public static int count = 0;
 
         private void button_add_employee_Click(object sender, RoutedEventArgs e)
         {
 
             if (textBox_name.Text == "")
             {
-                textBox_name.Text = "Введите ФИО";
+                MessageBox.Show("Введите ФИО");
             }
             else if (textBox_salary.Text == "")
             {
@@ -71,14 +71,63 @@ namespace WpfApp1
 
         }
 
+        Employee[] managers = new Employee[10];
+
+        public static int count_m = 0;
+        private void button_add_manager_Click(object sender, RoutedEventArgs e)
+        {
+            if (textBox_name_m.Text == "")
+            {
+                MessageBox.Show("Введите ФИО");
+            }
+            else if (textBox_bonus_m.Text == "")
+            {
+                MessageBox.Show("Введите бонус");
+            }
+            else if (textBox_salary_m.Text == "")
+            {
+                managers[count_m] = new Manager(textBox_name_m.Text, Convert.ToInt32(textBox_bonus_m.Text));
+                listBox_list_managers.Items.Add(managers[count_m]);
+                textBox_name_m.Text = "";
+                textBox_salary_m.Text = "";
+                textBox_date_m.Text = "";
+                textBox_month_m.Text = "";
+                textBox_year_m.Text = "";
+                textBox_bonus_m.Text = "";
+            }
+            else if (textBox_date_m.Text == "" || textBox_month_m.Text == "" || textBox_year_m.Text == "")
+            {
+                managers[count_m] = new Manager(textBox_name_m.Text, Convert.ToInt32(textBox_salary_m.Text), Convert.ToInt32(textBox_bonus_m.Text));
+                listBox_list_managers.Items.Add(managers[count_m]);
+                textBox_name_m.Text = "";
+                textBox_salary_m.Text = "";
+                textBox_date_m.Text = "";
+                textBox_month_m.Text = "";
+                textBox_year_m.Text = "";
+                textBox_bonus_m.Text = "";
+            }
+            else if (textBox_date_m.Text != "" && textBox_month_m.Text != "" && textBox_year_m.Text != "")
+            {
+                managers[count_m] = new Manager(textBox_name_m.Text, Convert.ToInt32(textBox_salary_m.Text), Convert.ToInt32(textBox_date_m.Text), Convert.ToInt32(textBox_month_m.Text), Convert.ToInt32(textBox_year_m.Text), Convert.ToInt32(textBox_bonus_m.Text));
+                listBox_list_managers.Items.Add(managers[count_m]);
+                textBox_name_m.Text = "";
+                textBox_salary_m.Text = "";
+                textBox_date_m.Text = "";
+                textBox_month_m.Text = "";
+                textBox_year_m.Text = "";
+                textBox_bonus_m.Text = "";
+            }
+            count++;
+        }
+
         private void button_increase_salary_Click(object sender, RoutedEventArgs e)
         {
-            //foreach (var employee in emps)
-            //{
-            //    employee.IncreaseSalary(20);
-            //    listBox_list_employee.Items.Clear();
-            //    listBox_list_employee.Items.Add(employee);
-            //}
+            foreach (var employee in emps)
+            {
+                employee.IncreaseSalary(20);
+                listBox_list_employee.Items.Clear();
+                listBox_list_employee.Items.Add(employee);
+            }
 
             //for (int i = 0; i < emps.Length; i++)
             //{
@@ -87,20 +136,10 @@ namespace WpfApp1
             //    listBox_list_employee.Items.Add(emps[i]);
             //}
 
-            emps[0].IncreaseSalary(20);
-            listBox_list_employee.Items.Add(emps[0]);
+            //emps[0].IncreaseSalary(20);
+            //listBox_list_employee.Items.Add(emps[0]);
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Employee[] emps_m = new Employee[4];
-            emps_m[0] = new Employee("Иван Иванов", 1000);
-            emps_m[1] = new Employee("Петр Петров", 2000, 1, 3, 2020);
-            emps_m[2] = new Manager("Ева Браун", 1000, 10000);
-            emps_m[3] = new Manager("Ольга Кирова", 2000, 20000);
-
-            listBox_list_employees_and_managers.ItemsSource = emps_m;
-        }
     }
 }

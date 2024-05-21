@@ -37,7 +37,7 @@ namespace WpfApp1
 
         public override string ToString()
         {
-            return "manager " + base.ToString() + ", бонус: " + this.bonus;
+            return "id" + id + " менеджер " + base.ToString() + " (бонус: " + this.bonus + ")";
         }
 
     }
