@@ -23,7 +23,7 @@ namespace WpfApp1
         private int salary;
         private DateTime hireDate;
         public int id;
-        public static int nextId = 1;
+        public static int nextId = 0;
 
         // Конструкторы
         public Employee(String name, int salary, int day, int month, int year) { 
@@ -34,7 +34,6 @@ namespace WpfApp1
         }
 
         public Employee(String name, int salary)
-        //: this(name, salary, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, id) { }
         {
             this.name = name;
             this.salary = salary;
