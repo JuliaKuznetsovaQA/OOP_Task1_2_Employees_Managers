@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,27 +12,35 @@ using System.Windows.Shapes;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    /// 
-    //1(тема 1). Создать класс Employee:
-
-
-
+    
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            listBox_list_employee.ItemsSource = employees;
         }
 
-        Employee[] emps = new Employee[10];
-        
-        public static int count = 0;
+        List<Employee> employees = new List<Employee>();
 
+        
         private void button_add_employee_Click(object sender, RoutedEventArgs e)
         {
+            TextBox[] textBoxes = {
+                textBox_name, 
+                textBox_salary,
+                textBox_date,
+                textBox_month,
+                textBox_year};
+
+            void clearTextBoxes()
+            {
+                foreach (var textBox in textBoxes)
+                {
+                    textBox.Text = "";
+                }
+            }
+            
 
             if (textBox_name.Text == "")
             {
@@ -39,43 +48,41 @@ namespace WpfApp1
             }
             else if (textBox_salary.Text == "")
             {
-                emps[count] = new Employee(textBox_name.Text);
-                listBox_list_employee.Items.Add(emps[count]);
-                textBox_name.Text = "";
-                textBox_salary.Text = "";
-                textBox_date.Text = "";
-                textBox_month.Text = "";
-                textBox_year.Text = "";
+                employees.Add(new Employee(textBox_name.Text));
             }
             else if (textBox_date.Text == "" || textBox_month.Text == "" || textBox_year.Text == "")
             {
-                emps[count] = new Employee(textBox_name.Text, Convert.ToInt32(textBox_salary.Text));
-                listBox_list_employee.Items.Add(emps[count]);
-                textBox_name.Text = "";
-                textBox_salary.Text = "";
-                textBox_date.Text = "";
-                textBox_month.Text = "";
-                textBox_year.Text = "";
+                employees.Add(new Employee(textBox_name.Text, Convert.ToInt32(textBox_salary.Text)));
             }
             else if (textBox_date.Text != "" && textBox_month.Text != "" && textBox_year.Text != "")
             {
-                emps[count] = new Employee(textBox_name.Text, Convert.ToInt32(textBox_salary.Text), Convert.ToInt32(textBox_date.Text), Convert.ToInt32(textBox_month.Text), Convert.ToInt32(textBox_year.Text));
-                listBox_list_employee.Items.Add(emps[count]);
-                textBox_name.Text = "";
-                textBox_salary.Text = "";
-                textBox_date.Text = "";
-                textBox_month.Text = "";
-                textBox_year.Text = "";
+                employees.Add(new Employee(textBox_name.Text, Convert.ToInt32(textBox_salary.Text), Convert.ToInt32(textBox_date.Text), Convert.ToInt32(textBox_month.Text), Convert.ToInt32(textBox_year.Text)));
+                
             }
-            count++;
-
+            listBox_list_employee.Items.Refresh();
+            clearTextBoxes();
+            
         }
 
-        Employee[] managers = new Employee[10];
-
-        public static int count_m = 0;
+        
         private void button_add_manager_Click(object sender, RoutedEventArgs e)
         {
+            TextBox[] textBoxes = {
+                textBox_name_m,
+                textBox_salary_m,
+                textBox_date_m,
+                textBox_month_m,
+                textBox_year_m,
+                textBox_bonus_m};
+
+            void clearTextBoxes_m()
+            {
+                foreach (var textBox in textBoxes)
+                {
+                    textBox.Text = "";
+                }
+            }
+
             if (textBox_name_m.Text == "")
             {
                 MessageBox.Show("Введите ФИО");
@@ -86,59 +93,43 @@ namespace WpfApp1
             }
             else if (textBox_salary_m.Text == "")
             {
-                managers[count_m] = new Manager(textBox_name_m.Text, Convert.ToInt32(textBox_bonus_m.Text));
-                listBox_list_managers.Items.Add(managers[count_m]);
-                textBox_name_m.Text = "";
-                textBox_salary_m.Text = "";
-                textBox_date_m.Text = "";
-                textBox_month_m.Text = "";
-                textBox_year_m.Text = "";
-                textBox_bonus_m.Text = "";
+                employees.Add(new Manager(textBox_name_m.Text, Convert.ToInt32(textBox_bonus_m.Text)));
+                
             }
             else if (textBox_date_m.Text == "" || textBox_month_m.Text == "" || textBox_year_m.Text == "")
             {
-                managers[count_m] = new Manager(textBox_name_m.Text, Convert.ToInt32(textBox_salary_m.Text), Convert.ToInt32(textBox_bonus_m.Text));
-                listBox_list_managers.Items.Add(managers[count_m]);
-                textBox_name_m.Text = "";
-                textBox_salary_m.Text = "";
-                textBox_date_m.Text = "";
-                textBox_month_m.Text = "";
-                textBox_year_m.Text = "";
-                textBox_bonus_m.Text = "";
+                employees.Add(new Manager(textBox_name_m.Text, Convert.ToInt32(textBox_salary_m.Text), Convert.ToInt32(textBox_bonus_m.Text)));
+                
             }
             else if (textBox_date_m.Text != "" && textBox_month_m.Text != "" && textBox_year_m.Text != "")
             {
-                managers[count_m] = new Manager(textBox_name_m.Text, Convert.ToInt32(textBox_salary_m.Text), Convert.ToInt32(textBox_date_m.Text), Convert.ToInt32(textBox_month_m.Text), Convert.ToInt32(textBox_year_m.Text), Convert.ToInt32(textBox_bonus_m.Text));
-                listBox_list_managers.Items.Add(managers[count_m]);
-                textBox_name_m.Text = "";
-                textBox_salary_m.Text = "";
-                textBox_date_m.Text = "";
-                textBox_month_m.Text = "";
-                textBox_year_m.Text = "";
-                textBox_bonus_m.Text = "";
+                employees.Add(new Manager(textBox_name_m.Text, Convert.ToInt32(textBox_salary_m.Text), Convert.ToInt32(textBox_date_m.Text), Convert.ToInt32(textBox_month_m.Text), Convert.ToInt32(textBox_year_m.Text), Convert.ToInt32(textBox_bonus_m.Text)));
+                
             }
-            count++;
+            listBox_list_employee.Items.Refresh();
+            clearTextBoxes_m();
+
         }
 
         private void button_increase_salary_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var employee in emps)
+            int percent = 0;
+            try
             {
-                employee.IncreaseSalary(20);
-                listBox_list_employee.Items.Clear();
-                listBox_list_employee.Items.Add(employee);
+                percent = Convert.ToInt32(textBox_percent.Text);
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Введите процент, на который нужно увеличить зарплату");
+            }
+            
 
-            //for (int i = 0; i < emps.Length; i++)
-            //{
-            //    emps[i].IncreaseSalary(20);
-            //    listBox_list_employee.Items.IndexOf(i).Equals(emps[i]);
-            //    listBox_list_employee.Items.Add(emps[i]);
-            //}
-
-            //emps[0].IncreaseSalary(20);
-            //listBox_list_employee.Items.Add(emps[0]);
-
+            foreach (Employee emp in employees)
+            {
+                emp.IncreaseSalary(percent);
+            }
+            listBox_list_employee.Items.Refresh();
+                        
         }
 
     }

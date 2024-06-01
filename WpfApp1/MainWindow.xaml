@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="800">
+        Title="MainWindow" Height="460" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
@@ -14,8 +14,6 @@
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
@@ -81,18 +79,16 @@
         <Label x:Name="label_list_employee" Grid.Row="6" Content="Список сотрудников" Background="#FF0CBCEA" Foreground="#FF060931" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Center"/>
 
         <StackPanel Grid.Row="7" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-            <ListBox x:Name="listBox_list_employee" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="20,0,20,0" MinWidth="450" HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
+            <ListBox x:Name="listBox_list_employee" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="20,0,20,0" MinWidth="700" HorizontalAlignment="Center" HorizontalContentAlignment="Left"/>
         </StackPanel>
 
-        <Label x:Name="label_list_managers" Grid.Row="8" Content="Список менеджеров" Background="#FF0CBCEA" Foreground="#FF060931" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+        
+        <StackPanel Grid.Row="8" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="62,0,0,0">
+            <Button x:Name="button_increase_salary" Content="Увеличить зарплату всем сотрудникам на " Click="button_increase_salary_Click" Background="#FFA9DC93"/>
 
-
-        <StackPanel Grid.Row="9" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-            <ListBox x:Name="listBox_list_managers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="20,0,20,0" MinWidth="450" HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
+            <TextBox x:Name="textBox_percent" TextWrapping="Wrap" Text="" Width="30" Margin="20,0,0,0"/>
+            <Label x:Name="label_percent" Content="%"/>
         </StackPanel>
-
-
-        <Button x:Name="button_increase_salary" Content="Увеличить зарплату всем сотрудникам" Grid.Row="10" Click="button_increase_salary_Click" Background="#FFA9DC93"/>
 
 
     </Grid>
